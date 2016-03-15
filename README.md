@@ -1,4 +1,4 @@
-Project PlaylistApp
+===== Project PlaylistApp =====
 
 
 Create a popular playlist application that accepts song playlists along with their
