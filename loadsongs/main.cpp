@@ -32,7 +32,6 @@ void printPlayListMap(const PlayListMap_t playListMap) {
         printPlaylist(x);
 }
 
-
 void printSong(const SongMap_t::value_type song) {
     cout << "song name: " << song.first << endl;
     if (!(song.second.artist.empty())){
@@ -93,6 +92,7 @@ int loadPlaylist(PlayListMap_t &playlistMap,
     if (!playListFile.is_open())
         return -1;
 
+
     while (getline(playListFile, line)) {
         istringstream iss(line);
 
@@ -119,7 +119,6 @@ int loadPlaylist(PlayListMap_t &playlistMap,
     return 0;
 }
 
-
 int main(int argc, char const *argv[])
 {
     (void) argc;
@@ -128,8 +127,8 @@ int main(int argc, char const *argv[])
     SongMap_t songMap;
     PlayListMap_t playListMap;
 
-    const string songlistFileName = "../PlaylistApp-Datasets/song_list.txt";
-    const string playlistFileName = "../PlaylistApp-Datasets/day00.txt";
+    const string songlistFileName = "../datasets/song_list.txt";
+    const string playlistFileName = "../datasets/day00.txt";
 
     if (loadSongs(songMap, songlistFileName)){
         cout << "ERROR: could not open file: " << songlistFileName << endl;
