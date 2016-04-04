@@ -1,8 +1,5 @@
 #include "songinfo.h"
 
-#include <iostream>
-#include <vector>
-#include <map>
 #include <QString>
 #include <QStringList>
 #include <QTextStream>
@@ -29,14 +26,14 @@ void SongInfo::printPlaylist(const PlayListMap_t::value_type playList) {
     qDebug() << endl;
 }
 
-void SongInfo::printPlayListMap() {
+void SongInfo::printAllPlayLists() {
     for (auto &x: playListMap)
         printPlaylist(x);
 }
 
 void SongInfo::printSong(const SongMap_t::value_type song) {
     qDebug() << "song name:" << song.first;
-    if (!(song.second.artist.isEmpty())){
+    if (!(song.second.artist.isEmpty())) {
         qDebug() << "song artist:" << song.second.artist;
         qDebug() << "song popularity:" << song.second.popularity;
         qDebug() << "song number:" << song.second.number;
@@ -44,7 +41,7 @@ void SongInfo::printSong(const SongMap_t::value_type song) {
     qDebug() << endl;
 }
 
-void SongInfo::printSongMap() {
+void SongInfo::printAllSongs() {
     for (auto &x: songMap)
         printSong(x);
 }
@@ -75,7 +72,7 @@ int SongInfo::loadSongFile(const QString filename) {
 
 int SongInfo::addPlaylist(QStringList numberList, int popularity) {
     if (playListMap.size() > 1023) {
-        PlayListMap_t::iterator lowestPlaylist = (--playListMap.end());
+        PlayListMap_t::iterator lowestPlaylist = --playListMap.end();
         if (popularity < (*lowestPlaylist).first)
             return 0;
         else
@@ -83,14 +80,14 @@ int SongInfo::addPlaylist(QStringList numberList, int popularity) {
     }
 
     PlayListMap_t::iterator it =
-            playListMap.insert(make_pair(popularity, std::vector<SongMap_t::value_type*>()));
+            playListMap.insert(make_pair(popularity, QVector<SongMap_t::iterator>()));
 
     for (auto &number : numberList) {
-        for (auto &x: songMap) {
-            if (x.second.number == number.toInt()){
-                x.second.popularity += popularity;
-                x.second.playlistVector.push_back(&(*it));
-                it->second.push_back(&x);
+        for (SongMap_t::iterator x = songMap.begin(); x != songMap.end(); ++x) {
+            if (x->second.number == number.toInt()){
+                x->second.popularity += popularity;
+                x->second.playlistVector.push_back(it);
+                it->second.push_back(x);
                 break;
             }
         }
@@ -104,7 +101,7 @@ void SongInfo::removePlaylist(PlayListMap_t::iterator playlist) {
         for (PlaylistVector_t::iterator it = song->second.playlistVector.begin();
              it != song->second.playlistVector.end();
              it ++)
-            if (*it == &(*playlist)) {
+            if (*it == playlist) {
                 song->second.playlistVector.erase(it);
                 break;
             }

@@ -2,8 +2,7 @@
 
 #include <QDebug>
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
     (void) argc;
     (void) argv;
 
@@ -11,10 +10,13 @@ int main(int argc, char const *argv[])
 
     songInfo.loadPlaylistFile("../datasets/day01.txt");
     songInfo.loadPlaylistFile("../datasets/day02.txt");
+    songInfo.loadPlaylistFile("../datasets/day03.txt");
+    songInfo.loadPlaylistFile("../datasets/day04.txt");
 
-    songInfo.printSongMap();
-    songInfo.printPlayListMap();
+    songInfo.printAllSongs();
+    songInfo.printAllPlayLists();
 
     qDebug() << "Number of playlists:" << songInfo.getNumPlaylists();
+
     return 0;
 }
