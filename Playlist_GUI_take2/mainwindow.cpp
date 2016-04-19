@@ -3,6 +3,8 @@
 #include "songinfo.h"
 #include <QTreeWidget>
 #include <QDebug>
+#include <QFileDialog>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,11 +12,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    SongInfo songInfo;
-    songInfo.loadPlaylistFile("/Users/codiesmith/Downloads/day01.txt");
-    songInfo.loadPlaylistFile("/Users/codiesmith/Downloads/day02.txt");
-    songInfo.loadPlaylistFile("/Users/codiesmith/Downloads/day03.txt");
-    songInfo.loadPlaylistFile("/Users/codiesmith/Downloads/day04.txt");
+    songInfo.loadPlaylistFile("../datasets/day01.txt");
+    songInfo.loadPlaylistFile("../datasets/day02.txt");
+    songInfo.loadPlaylistFile("../datasets/day03.txt");
+    songInfo.loadPlaylistFile("../datasets/day04.txt");
 
     QStringList DisBeTrending = (QStringList()<<"#dis"<<"#be"<<"#trending");
     ui->trending->insertItems(0, DisBeTrending);
@@ -62,4 +63,33 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
     ui->listWidget->insertItems(0, topFourSongs);
     }
 
+}
+
+void MainWindow::on_BrowseButton_clicked()
+{
+    PlaylistFileName = QFileDialog::getOpenFileName(
+                this,
+                tr("Open File"),
+                "../../../../datasets/",
+                "All Files (*.*)"
+                );
+
+    ui->PlaylistFileEdit->insert(PlaylistFileName);
+}
+
+void MainWindow::on_PlaylistFileEdit_textChanged(const QString &arg1)
+{
+    PlaylistFileName = ui->PlaylistFileEdit->displayText();
+}
+
+void MainWindow::on_UploadButton_clicked()
+{
+    int x = songInfo.loadPlaylistFile(PlaylistFileName);
+    if (x == 0) {
+        QMessageBox::information(this,tr("Successful Upload"),"The file " + PlaylistFileName +" was successfully uploaded!");
+    }
+    else {
+        QMessageBox::critical(this,tr("Unsuccessful Upload"),"The file " + PlaylistFileName +" does not exist");
+    }
+    ui->PlaylistFileEdit->clear();
 }

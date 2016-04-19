@@ -9,8 +9,8 @@
 
 using namespace std;
 SongInfo::SongInfo() {
-    const QString songlistFileName = "/Users/codiesmith/Downloads/song_list.txt";
-    const QString playlistFileName = "/Users/codiesmith/Downloads/day00.txt";
+    const QString songlistFileName = "../../../../datasets/song_list.txt";
+    const QString playlistFileName = "../../../../datasets/day00.txt";
 
     if (loadSongFile(songlistFileName)) {
         qDebug() << "ERROR: could not open file:" << songlistFileName;
