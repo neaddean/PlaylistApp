@@ -263,9 +263,9 @@
      <widget class="QSpinBox" name="PopularityScore">
       <property name="geometry">
        <rect>
-        <x>500</x>
+        <x>470</x>
         <y>180</y>
-        <width>121</width>
+        <width>181</width>
         <height>51</height>
        </rect>
       </property>
@@ -273,6 +273,9 @@
        <font>
         <pointsize>42</pointsize>
        </font>
+      </property>
+      <property name="accelerated">
+       <bool>true</bool>
       </property>
       <property name="minimum">
        <number>1</number>

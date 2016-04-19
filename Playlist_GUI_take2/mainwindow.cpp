@@ -102,7 +102,7 @@ void MainWindow::on_pushButton_clicked()
     playlist = playlist.simplified();
     playlist.replace( " ", "" );
     QRegExp re("^[0-9,.]*$");
-    if (re.exactMatch(playlist) && score > 0) {
+    if (re.exactMatch(playlist) && score > 0 && score < 1000000) {
         QStringList Playlist_List = playlist.split(",");
         songInfo.addPlaylist(Playlist_List, score);
         QMessageBox::information(this,tr("Successful Upload"),"Your playlist was successfully uploaded!");
