@@ -1,8 +1,8 @@
 #ifndef SONGINFO
 #define SONGINFO
 
-#include <QVector>
 #include <map>
+#include <QVector>
 #include <QString>
 
 class SongInfo {
@@ -10,6 +10,7 @@ class SongInfo {
 
     typedef std::map<QString, SongData> SongMap_t;
     typedef QVector<SongMap_t::iterator> SongVector_t;
+
     typedef std::multimap<int, SongVector_t, std::greater<int>> PlayListMap_t;
     typedef QVector<PlayListMap_t::iterator> PlaylistVector_t;
 
