@@ -42,6 +42,8 @@ public:
     void printAllSongs();
 
     QStringList findFourSongs(QString text);
+    QStringList playlistWithSong(int songID);
+
 };
 
 #endif // SONGINFO

@@ -185,6 +185,8 @@ int SongInfo::loadPlaylistFile(const QString filename) {
     return 0;
 }
 
+/*This function finds the four most popular songs
+that contain the entered text*/
 QStringList SongInfo::findFourSongs(QString text){
 
     multimap<QString,int> newMulti;
@@ -193,14 +195,13 @@ QStringList SongInfo::findFourSongs(QString text){
         QString songnombre = iter->first;
         SongData info = iter->second;
 
-        qDebug() << text[0];
-        qDebug() << songnombre[0];
-
+        /*iterates through the length of the entered text and if
+         the current iterator does not match the song name, it is not entered
+         into the temporary map*/
         bool songIn = true;
         for(int i=0; i < text.length(); i++){
             if(text[i] != songnombre[i]){
                 songIn = false;
-                qDebug() << "YEE: " << songnombre;
                 break;
             }
         }
