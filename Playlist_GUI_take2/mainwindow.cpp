@@ -52,9 +52,14 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 {
 
     QString current = ui->lineEdit->displayText();
-
     QStringList topFourSongs = songInfo.findFourSongs(current);
     ui->listWidget->clear();
+    if(current == ""){
+        QStringList blank = (QStringList()<<"");
+        ui->listWidget->insertItems(0,blank);
+    }
+    else{
     ui->listWidget->insertItems(0, topFourSongs);
+    }
 
 }

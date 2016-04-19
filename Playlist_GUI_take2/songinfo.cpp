@@ -184,7 +184,7 @@ QStringList SongInfo::findFourSongs(QString text){
     return fourSongs;
 }
 
-QStringList SongInfo::playlistWithSong(int songID){
+/*QStringList SongInfo::playlistWithSong(int songID){
 
     PlayListMap_t::iterator it = playListMap.begin();
     for(PlayListMap_t::iterator it = playListMap.begin(); it != playListMap.end(); ++it){
@@ -194,7 +194,7 @@ QStringList SongInfo::playlistWithSong(int songID){
         }
     }
 
-}
+}*/
 
 int SongInfo::getNumPlaylists() {
     return playListMap.size();
