@@ -93,3 +93,24 @@ void MainWindow::on_UploadButton_clicked()
     }
     ui->PlaylistFileEdit->clear();
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    QString scoretext = ui->PopularityScore->text();
+    QString playlist = ui->PlaylistNumbers->toPlainText();
+    int score = scoretext.toInt();
+    playlist = playlist.simplified();
+    playlist.replace( " ", "" );
+    QRegExp re("^[0-9,.]*$");
+    if (re.exactMatch(playlist) && score > 0) {
+        QStringList Playlist_List = playlist.split(",");
+        songInfo.addPlaylist(Playlist_List, score);
+        QMessageBox::information(this,tr("Successful Upload"),"Your playlist was successfully uploaded!");
+    }
+    else {
+        QMessageBox::critical(this,tr("Unsuccessful Upload"),"There exists a problem with one or both of your inputs.");
+    }
+    ui->PopularityScore->setValue(1);
+    ui->PlaylistNumbers->clear();
+
+}
