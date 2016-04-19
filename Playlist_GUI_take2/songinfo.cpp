@@ -161,10 +161,10 @@ QStringList SongInfo::findFourSongs(QString text){
     }
 
     QString *songArray = new QString[4];
-    songArray[0] = "a";
-    songArray[1] = "b";
-    songArray[2] = "c";
-    songArray[3] = "d";
+    songArray[0] = "";
+    songArray[1] = "";
+    songArray[2] = "";
+    songArray[3] = "";
 
     for(int i=0; i<4; i++){
         int temp = 0;
@@ -181,8 +181,19 @@ QStringList SongInfo::findFourSongs(QString text){
     }
 
     QStringList fourSongs = (QStringList()<<songArray[0]<<songArray[1]<<songArray[2]<<songArray[3]);
-    qDebug() << fourSongs;
     return fourSongs;
+}
+
+QStringList SongInfo::playlistWithSong(int songID){
+
+    PlayListMap_t::iterator it = playListMap.begin();
+    for(PlayListMap_t::iterator it = playListMap.begin(); it != playListMap.end(); ++it){
+        QVector<int> temp = it->second;
+        if(temp.contains(songID)){
+            qDebug() << "YAS";
+        }
+    }
+
 }
 
 int SongInfo::getNumPlaylists() {

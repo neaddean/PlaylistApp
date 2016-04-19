@@ -11,8 +11,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Playlist_GUI
 TEMPLATE = app
 
-QMAKE_CXXFLAGS += -std=c++14 -Wall -Wextra
-CONFIG += c++14
 
 SOURCES += main.cpp\
         mainwindow.cpp \
