@@ -8,9 +8,13 @@
 #include <map>
 
 using namespace std;
+/**
+ * SongInfo constructor
+ * Loads the day 0 playlist file and song list
+ */
 SongInfo::SongInfo() {
-    const QString songlistFileName = "/Users/codiesmith/Downloads/song_list.txt";
-    const QString playlistFileName = "/Users/codiesmith/Downloads/day00.txt";
+    const QString songlistFileName = "../datasets/song_list.txt";
+    const QString playlistFileName = "../datasets/day00.txt";
 
     if (loadSongFile(songlistFileName)) {
         qDebug() << "ERROR: could not open file:" << songlistFileName;
@@ -21,6 +25,10 @@ SongInfo::SongInfo() {
     }
 }
 
+/**
+ * printPlaylist
+ * Prints the contents of a playlist to the console
+ */
 void SongInfo::printPlaylist(const PlayListMap_t::value_type playList) {
     qDebug() << "Playlist popularity:" << playList.first;
     for (auto &x: playList.second)
@@ -28,11 +36,19 @@ void SongInfo::printPlaylist(const PlayListMap_t::value_type playList) {
     qDebug() << endl;
 }
 
+/**
+ * printAllPlayLists
+ * Prints off of the playlists stored in the playlist map to the console
+ */
 void SongInfo::printAllPlayLists() {
     for (auto &x: playListMap)
         printPlaylist(x);
 }
 
+/**
+ * printSong
+ * Prints the contents of a song to the console
+ */
 void SongInfo::printSong(const SongMap_t::value_type song) {
     qDebug() << "song name:" << song.first;
     if (!(song.second.artist.isEmpty())) {
@@ -43,11 +59,19 @@ void SongInfo::printSong(const SongMap_t::value_type song) {
     qDebug() << endl;
 }
 
+/**
+ * printAllSongs
+ * Prints all of the songs stored in the song map to the console
+ */
 void SongInfo::printAllSongs() {
     for (auto &x: songMap)
         printSong(x);
 }
 
+/**
+ * loadSongFile
+ * Loads the songs from a file into the song map
+ */
 int SongInfo::loadSongFile(const QString filename) {
     QString line, songName;
     QStringList tokens;
@@ -55,16 +79,17 @@ int SongInfo::loadSongFile(const QString filename) {
 
     if (!songListFile.open(QIODevice::ReadOnly | QIODevice::Text))
         return -1;
+    // create stream to read from file
     QTextStream songStream(&songListFile);
 
     while (!songStream.atEnd()) {
         line = songStream.readLine();
         SongData data;
-        tokens = line.split('\t');
-        data.number = tokens[0].toInt();
-        songName = tokens[1];
-        data.artist = tokens[2];
-        songMap[songName] = data;
+        tokens = line.split('\t'); // split line by tabs
+        data.number = tokens[0].toInt(); // extract song number
+        songName = tokens[1]; // extract song name
+        data.artist = tokens[2]; // extract song artist
+        songMap[songName] = data; // add song to song map
     }
 
     songListFile.close();
@@ -72,37 +97,58 @@ int SongInfo::loadSongFile(const QString filename) {
     return 0;
 }
 
+/**
+ * addPlaylist
+ * Adds a playlist to the map. If there are more than 1024, then it removes
+ * the least popular one.
+ */
 int SongInfo::addPlaylist(QStringList numberList, int popularity) {
     if (playListMap.size() > 1023) {
+        // Get iterator to least popular playlist
         PlayListMap_t::iterator lowestPlaylist = --playListMap.end();
-        if (popularity < (*lowestPlaylist).first)
+        if (popularity < lowestPlaylist->first)
             return 0;
         else
             removePlaylist(lowestPlaylist);
     }
 
+    // Add an empty playlist. Must create an empty vector to put into map.
+    // QVector<SongMap_t::iterator>() creates the empty vector
     PlayListMap_t::iterator it =
             playListMap.insert(make_pair(popularity, QVector<SongMap_t::iterator>()));
 
+    // iterate though the songs that are being added
     for (auto &number : numberList) {
+        // iterate though every song in the map
         for (SongMap_t::iterator x = songMap.begin(); x != songMap.end(); ++x) {
+            // if the song in the map matches the song we are seeking
             if (x->second.number == number.toInt()){
-                x->second.popularity += popularity;
-                x->second.playlistVector.push_back(it);
-                it->second.push_back(x);
-                break;
+                x->second.popularity += popularity; // update song popularity
+                x->second.playlistVector.push_back(it); // add playlist to song
+                it->second.push_back(x); // add song to playlist
+                break; // go to the next song that is to be added
             }
         }
     }
     return 1;
 }
 
+/**
+ * removePlaylist
+ * Removes a playlist from the playlist map. First, it removes
+ * the playlist from all song it is contained on, then removes
+ * the playlist from the map.
+ */
 void SongInfo::removePlaylist(PlayListMap_t::iterator playlist) {
-    for (auto &song : (*playlist).second){
-        song->second.popularity -= (*playlist).first;
+    // iterate through the songs on the playlist
+    for (auto &song : playlist->second){
+        // update song popularity
+        song->second.popularity -= playlist->first;
+        // then, iterate through the playlists of the given song
         for (PlaylistVector_t::iterator it = song->second.playlistVector.begin();
              it != song->second.playlistVector.end();
              it ++)
+            // then remove the playlist from the list of playlists in the given song
             if (*it == playlist) {
                 song->second.playlistVector.erase(it);
                 break;
@@ -110,6 +156,11 @@ void SongInfo::removePlaylist(PlayListMap_t::iterator playlist) {
     }
     playListMap.erase(playlist);
 }
+
+/**
+ * loadPlaylistFile
+ * Loads all the playlists in a given file
+ */
 
 int SongInfo::loadPlaylistFile(const QString filename) {
     QString line;
@@ -123,10 +174,10 @@ int SongInfo::loadPlaylistFile(const QString filename) {
 
     while (!playListFile.atEnd()) {
         line = playListFile.readLine();
-        tokens = line.split('\t');
-        popularity = tokens[1].toInt();
-        numberList = tokens[0].split(' ');
-        addPlaylist(numberList, popularity);
+        tokens = line.split('\t'); // First, split the popularity from the songs
+        popularity = tokens[1].toInt(); // Extract popularity
+        numberList = tokens[0].split(' '); // Split remaining song numbers into a list
+        addPlaylist(numberList, popularity); // add playlist to mapp
     }
 
     playListFile.close();
@@ -184,6 +235,10 @@ QStringList SongInfo::findFourSongs(QString text){
     return fourSongs;
 }
 
+/**
+ * getNumPlaylists
+ * Gets the numbers of playlists in the map
+ */
 int SongInfo::getNumPlaylists() {
     return playListMap.size();
 }
