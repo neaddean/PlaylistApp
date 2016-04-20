@@ -9,6 +9,7 @@
 
 using namespace std;
 SongInfo::SongInfo() {
+
     const QString songlistFileName = "../../../../datasets/song_list.txt";
     const QString playlistFileName = "../../../../datasets/day00.txt";
 
@@ -183,6 +184,7 @@ QStringList SongInfo::findFourSongs(QString text){
     QStringList fourSongs = (QStringList()<<songArray[0]<<songArray[1]<<songArray[2]<<songArray[3]);
     return fourSongs;
 }
+
 
 /*QStringList SongInfo::playlistWithSong(int songID){
 
