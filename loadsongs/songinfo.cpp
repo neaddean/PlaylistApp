@@ -1,6 +1,5 @@
 #include "songinfo.h"
 
-#include <map>
 #include <QString>
 #include <QStringList>
 #include <QTextStream>
@@ -74,7 +73,7 @@ int SongInfo::loadSongFile(const QString filename) {
 int SongInfo::addPlaylist(QStringList numberList, int popularity) {
     if (playListMap.size() > 1023) {
         PlayListMap_t::iterator lowestPlaylist = --playListMap.end();
-        if (popularity < lowestPlaylist->first)
+        if (popularity < (*lowestPlaylist).first)
             return 0;
         else
             removePlaylist(lowestPlaylist);
@@ -97,11 +96,11 @@ int SongInfo::addPlaylist(QStringList numberList, int popularity) {
 }
 
 void SongInfo::removePlaylist(PlayListMap_t::iterator playlist) {
-    for (auto &song : playlist->second){
-        song->second.popularity -= playlist->first;
+    for (auto &song : (*playlist).second){
+        song->second.popularity -= (*playlist).first;
         for (PlaylistVector_t::iterator it = song->second.playlistVector.begin();
              it != song->second.playlistVector.end();
-             ++it)
+             it ++)
             if (*it == playlist) {
                 song->second.playlistVector.erase(it);
                 break;

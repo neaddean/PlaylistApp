@@ -13,8 +13,8 @@ int main(int argc, char const *argv[]) {
     songInfo.loadPlaylistFile("../datasets/day03.txt");
     songInfo.loadPlaylistFile("../datasets/day04.txt");
 
-//    songInfo.printAllSongs();
-//    songInfo.printAllPlayLists();
+    songInfo.printAllSongs();
+    songInfo.printAllPlayLists();
 
     qDebug() << "Number of playlists:" << songInfo.getNumPlaylists();
 
