@@ -9,7 +9,6 @@
 
 using namespace std;
 SongInfo::SongInfo() {
-
     const QString songlistFileName = "/Users/codiesmith/Downloads/song_list.txt";
     const QString playlistFileName = "/Users/codiesmith/Downloads/day00.txt";
 
@@ -184,7 +183,6 @@ QStringList SongInfo::findFourSongs(QString text){
     QStringList fourSongs = (QStringList()<<songArray[0]<<songArray[1]<<songArray[2]<<songArray[3]);
     return fourSongs;
 }
-
 
 int SongInfo::getNumPlaylists() {
     return playListMap.size();
