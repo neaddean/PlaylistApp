@@ -50,7 +50,7 @@ void SongInfo::printAllPlayLists() {
  * Prints the contents of a song to the console
  */
 void SongInfo::printSong(const SongMap_t::value_type song) {
-    qDebug() << "song name:" << song.first;
+    qDebug() << "song name:" << song.second.name;
     if (!(song.second.artist.isEmpty())) {
         qDebug() << "song artist:" << song.second.artist;
         qDebug() << "song popularity:" << song.second.popularity;
@@ -88,8 +88,9 @@ int SongInfo::loadSongFile(const QString filename) {
         tokens = line.split('\t'); // split line by tabs
         data.number = tokens[0].toInt(); // extract song number
         songName = tokens[1]; // extract song name
+        data.name = songName;
         data.artist = tokens[2]; // extract song artist
-        songMap[songName] = data; // add song to song map
+        songMap[songName.toLower()] = data; // add song to song map
     }
 
     songListFile.close();
@@ -191,6 +192,9 @@ QStringList SongInfo::findFourSongs(QString text){
 
     multimap<QString,int> newMulti;
 
+    // make text lowercase for better matching
+    text = text.toLower();
+
     for(SongMap_t::iterator iter = songMap.begin(); iter != songMap.end(); ++iter){
         QString songnombre = iter->first;
         SongData info = iter->second;
@@ -207,7 +211,7 @@ QStringList SongInfo::findFourSongs(QString text){
         }
         if(songIn){
             int newInt = info.popularity;
-            newMulti.insert(pair<QString,int>(songnombre,newInt));
+            newMulti.insert(pair<QString,int>(info.name,newInt));
         }
     }
 

@@ -17,6 +17,7 @@ class SongInfo {
         int number;
         int popularity;
         QString artist;
+        QString name;
         PlaylistVector_t playlistVector;
     };
 
