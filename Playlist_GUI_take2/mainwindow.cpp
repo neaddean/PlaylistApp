@@ -12,10 +12,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    songInfo.loadPlaylistFile("../../../../datasets/day01.txt");
-    songInfo.loadPlaylistFile("../../../../datasets/day02.txt");
-    songInfo.loadPlaylistFile("../../../../datasets/day03.txt");
-    songInfo.loadPlaylistFile("../../../../datasets/day04.txt");
+    songInfo.loadPlaylistFile("../datasets/day01.txt");
+    songInfo.loadPlaylistFile("../datasets/day02.txt");
+    songInfo.loadPlaylistFile("../datasets/day03.txt");
+    songInfo.loadPlaylistFile("../datasets/day04.txt");
 
     QStringList DisBeTrending = (QStringList()<<"#dis"<<"#be"<<"#trending");
     ui->trending->insertItems(0, DisBeTrending);
@@ -70,7 +70,7 @@ void MainWindow::on_BrowseButton_clicked()
     PlaylistFileName = QFileDialog::getOpenFileName(
                 this,
                 tr("Open File"),
-                "../../../../datasets/",
+                "../datasets/",
                 "All Files (*.*)"
                 );
 
