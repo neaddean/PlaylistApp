@@ -13,7 +13,7 @@ TEMPLATE = app
 
 QMAKE_CXXFLAGS += -std=c++14 -Wall -Wextra
 CONFIG += c++14
-CONFIG-=app_bundle
+CONFIG -= app_bundle
 
 SOURCES += main.cpp\
         mainwindow.cpp \
