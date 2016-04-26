@@ -12,10 +12,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    songInfo.loadPlaylistFile("../datasets/day01.txt");
-    songInfo.loadPlaylistFile("../datasets/day02.txt");
-    songInfo.loadPlaylistFile("../datasets/day03.txt");
-    songInfo.loadPlaylistFile("../datasets/day04.txt");
+    songInfo.loadPlaylistFile("../../../../datasets/day01.txt");
+    songInfo.loadPlaylistFile("../../../../datasets/day02.txt");
+    songInfo.loadPlaylistFile("../../../../datasets/day03.txt");
+    songInfo.loadPlaylistFile("../../../../datasets/day04.txt");
 
     QStringList DisBeTrending = (QStringList()<<"#dis"<<"#be"<<"#trending");
     ui->trending->insertItems(0, DisBeTrending);
@@ -44,7 +44,7 @@ void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
     ui->resultLabel->setText(resutLabelText);
     ui->mostPop->clear();
 
-    QStringList mostPopularPlaylist = (QStringList()<<"Suck"<<"My"<<"Dick"<<"Bitch");
+    QStringList mostPopularPlaylist = (QStringList()<<"This"<<"Is"<<"A"<<"Playlist"<<":)");
     ui->mostPop->insertItems(0, mostPopularPlaylist);
 
 }
@@ -113,4 +113,12 @@ void MainWindow::on_pushButton_clicked()
     ui->PopularityScore->setValue(1);
     ui->PlaylistNumbers->clear();
 
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    ui->trending->clear();
+
+    QStringList TopPlaylists = (QStringList()<<"This"<<"Is"<<"Are"<<"Playlists"<<":)");
+    ui->trending->insertItems(0,TopPlaylists);
 }

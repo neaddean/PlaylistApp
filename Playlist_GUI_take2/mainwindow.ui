@@ -42,10 +42,10 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image:qconicalgradient(cx:0.5, cy:0.5, angle:0, stop:0 rgba(35, 40, 3, 255), stop:0.16 rgba(136, 106, 22, 255), stop:0.225 rgba(166, 140, 41, 255), stop:0.285 rgba(204, 181, 74, 255), stop:0.345 rgba(235, 219, 102, 255), stop:0.415 rgba(245, 236, 112, 255), stop:0.52 rgba(209, 190, 76, 255), stop:0.57 rgba(187, 156, 51, 255), stop:0.635 rgba(168, 142, 42, 255), stop:0.695 rgba(202, 174, 68, 255), stop:0.75 rgba(218, 202, 86, 255), stop:0.815 rgba(208, 187, 73, 255), stop:0.88 rgba(187, 156, 51, 255), stop:0.935 rgba(137, 108, 26, 255), stop:1 rgba(35, 40, 3, 255))</string>
+     <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -54,9 +54,9 @@
      <widget class="QGroupBox" name="top8Box">
       <property name="geometry">
        <rect>
-        <x>580</x>
+        <x>510</x>
         <y>0</y>
-        <width>221</width>
+        <width>291</width>
         <height>431</height>
        </rect>
       </property>
@@ -68,9 +68,22 @@
         <rect>
          <x>20</x>
          <y>40</y>
-         <width>181</width>
-         <height>371</height>
+         <width>251</width>
+         <height>351</height>
         </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>390</y>
+         <width>115</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Refresh</string>
        </property>
       </widget>
      </widget>
@@ -102,7 +115,7 @@
          <x>10</x>
          <y>60</y>
          <width>151</width>
-         <height>101</height>
+         <height>111</height>
         </rect>
        </property>
       </widget>
@@ -112,7 +125,7 @@
        <rect>
         <x>190</x>
         <y>0</y>
-        <width>381</width>
+        <width>301</width>
         <height>431</height>
        </rect>
       </property>
@@ -124,8 +137,8 @@
         <rect>
          <x>10</x>
          <y>30</y>
-         <width>361</width>
-         <height>51</height>
+         <width>271</width>
+         <height>81</height>
         </rect>
        </property>
        <property name="font">
@@ -151,7 +164,7 @@
         <rect>
          <x>20</x>
          <y>111</y>
-         <width>341</width>
+         <width>261</width>
          <height>301</height>
         </rect>
        </property>
