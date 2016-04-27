@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     songInfo.loadPlaylistFile("../datasets/day03.txt");
     songInfo.loadPlaylistFile("../datasets/day04.txt");
 
-    QStringList DisBeTrending = (QStringList()<<"#dis"<<"#be"<<"#trending");
+    QStringList DisBeTrending = songInfo.Top8Playlists();
     ui->trending->insertItems(0, DisBeTrending);
 }
 
