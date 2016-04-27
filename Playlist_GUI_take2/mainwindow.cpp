@@ -119,6 +119,6 @@ void MainWindow::on_pushButton_2_clicked()
 {
     ui->trending->clear();
 
-    QStringList TopPlaylists = (QStringList()<<"This"<<"Is"<<"Are"<<"Playlists"<<":)");
+    QStringList TopPlaylists = songInfo.Top8Playlists();
     ui->trending->insertItems(0,TopPlaylists);
 }

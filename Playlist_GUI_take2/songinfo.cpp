@@ -223,7 +223,7 @@ QStringList SongInfo::findFourSongs(QString text){
 
     for(int i=0; i<4; i++){
         int temp = 0;
-        QString tempStr = "b";
+        QString tempStr = "";
 
         for(multimap<QString,int>::iterator itah = newMulti.begin(); itah != newMulti.end(); ++itah){
             if(itah->second > temp){
@@ -247,3 +247,19 @@ int SongInfo::getNumPlaylists() {
     return playListMap.size();
 }
 
+QStringList SongInfo::Top8Playlists() {
+
+    QStringList finalList;
+    PlayListMap_t::iterator TopPlaylist = playListMap.begin();
+
+    for (int i = 0; i<8 ; i++) {
+
+         finalList<<QString("Number %1 Playlist; Popularity = %2:").arg(QString::number(i+1),QString::number(TopPlaylist->first));
+
+         for (auto &song: TopPlaylist -> second) {
+             finalList<<QString("       %1; by: %2").arg(song->second.name,song->second.artist);
+         }
+         TopPlaylist++;
+    }
+    return finalList;
+}
