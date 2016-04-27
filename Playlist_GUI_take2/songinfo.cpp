@@ -257,7 +257,7 @@ QStringList SongInfo::Top8Playlists() {
          finalList<<QString("Number %1 Playlist; Popularity = %2:").arg(QString::number(i+1),QString::number(TopPlaylist->first));
 
          for (auto &song: TopPlaylist -> second) {
-             finalList<<QString("       %1; by: %2").arg(song->second.name,song->second.artist);
+             finalList<<QString("       %1 - %2").arg(song->second.name,song->second.artist);
          }
          TopPlaylist++;
     }
