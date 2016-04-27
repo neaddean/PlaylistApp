@@ -45,6 +45,7 @@ public:
     QStringList findFourSongs(QString text);
     QStringList playlistWithSong(int songID);
     QStringList Top8Playlists();
+    QStringList mostPopularPlaylist(QString songName);
 
 };
 

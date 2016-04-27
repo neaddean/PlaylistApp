@@ -263,3 +263,21 @@ QStringList SongInfo::Top8Playlists() {
     }
     return finalList;
 }
+
+QStringList SongInfo::mostPopularPlaylist(QString songName){
+    QStringList Playlist;
+    SongData songStuff = songMap[songName.toLower()];
+    int maxPop = 0;
+    int best = 0;
+    for (int i=0; i < songStuff.playlistVector.size(); i++) {
+        if (songStuff.playlistVector.at(i)->first > maxPop) {
+            best = i;
+            maxPop = songStuff.playlistVector.at(i)->first;
+        }
+    }
+    Playlist << QString("Popularity: %1").arg(maxPop);
+    for (auto &song: songStuff.playlistVector.at(best) -> second) {
+        Playlist << QString("%1 - %2").arg(song->second.name,song->second.artist);
+    }
+    return Playlist;
+}

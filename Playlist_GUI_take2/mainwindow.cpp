@@ -44,7 +44,7 @@ void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
     ui->resultLabel->setText(resutLabelText);
     ui->mostPop->clear();
 
-    QStringList mostPopularPlaylist = (QStringList()<<"This"<<"Is"<<"A"<<"Playlist"<<":)");
+    QStringList mostPopularPlaylist = songInfo.mostPopularPlaylist(item->text());
     ui->mostPop->insertItems(0, mostPopularPlaylist);
 
 }
