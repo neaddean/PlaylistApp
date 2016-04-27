@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Playlist_GUI
 TEMPLATE = app
 
+win32:RC_ICONS += logo.ico
+
 QMAKE_CXXFLAGS += -std=c++14 -Wall -Wextra
 CONFIG += c++14
 CONFIG -= app_bundle
