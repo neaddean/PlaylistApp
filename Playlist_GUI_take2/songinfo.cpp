@@ -275,7 +275,7 @@ QStringList SongInfo::mostPopularPlaylist(QString songName){
             maxPop = songStuff.playlistVector.at(i)->first;
         }
     }
-    Playlist << QString("Popularity: %1").arg(maxPop);
+    Playlist << QString("Popularity of Playlist: %1").arg(maxPop);
     for (auto &song: songStuff.playlistVector.at(best) -> second) {
         Playlist << QString("%1 - %2").arg(song->second.name,song->second.artist);
     }
