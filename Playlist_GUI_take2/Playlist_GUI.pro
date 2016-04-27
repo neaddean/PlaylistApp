@@ -12,6 +12,7 @@ TARGET = Playlist_GUI
 TEMPLATE = app
 
 win32:RC_ICONS += logo.ico
+ICON = logo.icns
 
 QMAKE_CXXFLAGS += -std=c++14 -Wall -Wextra
 CONFIG += c++14
